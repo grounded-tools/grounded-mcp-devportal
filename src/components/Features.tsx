@@ -54,14 +54,14 @@ const features = [
   },
   {
     icon: RefreshCw,
-    title: "Auto-Refresh",
-    description: "Keep documentation up-to-date with automatic refresh and change detection",
-    tags: ["Real-time", "Monitoring"]
+    title: "OAuth Security",
+    description: "Secure access to your MCP server with OAuth authentication and authorization",
+    tags: ["Security", "Authentication"]
   },
   {
     icon: Shield,
     title: "Privacy-First",
-    description: "All processing happens locally - your code and queries never leave your machine",
+    description: "All processing happens locally - your code and queries never leave your machine*",
     tags: ["Local", "Secure"]
   },
   {
@@ -148,6 +148,13 @@ export const Features = () => {
               </ul>
             </div>
           </div>
+        </div>
+        
+        {/* Privacy Footnote */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-muted-foreground">
+            * Requires a local LLM for generating vectorization to maintain complete privacy
+          </p>
         </div>
       </div>
     </section>

@@ -32,39 +32,14 @@ export const Installation = () => {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const npmInstall = "npm install -g docs-mcp-server";
-  const configExample = `{
+  const npxCommand = "npx @arabold/docs-mcp-server@latest";
+  const vscodeExample = `{
   "mcpServers": {
     "docs": {
-      "command": "docs-mcp-server",
-      "args": ["--config", "./docs-config.json"]
+      "command": "npx",
+      "args": ["@arabold/docs-mcp-server@latest"]
     }
   }
-}`;
-
-  const configFile = `{
-  "sources": [
-    {
-      "type": "github",
-      "url": "https://github.com/microsoft/TypeScript",
-      "version": "5.3.0"
-    },
-    {
-      "type": "website", 
-      "url": "https://react.dev/",
-      "crawlDepth": 3
-    },
-    {
-      "type": "npm",
-      "package": "express",
-      "version": "4.18.0"
-    },
-    {
-      "type": "local",
-      "path": "./docs",
-      "pattern": "**/*.md"
-    }
-  ]
 }`;
 
   return (
@@ -92,14 +67,14 @@ export const Installation = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Terminal className="h-5 w-5 text-primary" />
-                    <span>1. Install via npm</span>
+                    <span>1. Start the server</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CodeBlock onCopy={() => handleCopy(npmInstall)}>
-                    {npmInstall}
+                  <CodeBlock onCopy={() => handleCopy(npxCommand)}>
+                    {npxCommand}
                   </CodeBlock>
-                  {copiedCode === npmInstall && (
+                  {copiedCode === npxCommand && (
                     <div className="flex items-center space-x-2 mt-2 text-success">
                       <CheckCircle className="h-4 w-4" />
                       <span className="text-sm">Copied to clipboard!</span>
@@ -110,41 +85,39 @@ export const Installation = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>2. Add to Claude Desktop</CardTitle>
+                  <CardTitle>2. Connect to VS Code</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">
-                    Add the following to your Claude Desktop configuration file:
+                    Configure VS Code to connect via Server-Sent Events (SSE). Add this to your VS Code settings:
                   </p>
-                  <CodeBlock onCopy={() => handleCopy(configExample)}>
-                    {configExample}
+                  <CodeBlock onCopy={() => handleCopy(vscodeExample)}>
+                    {vscodeExample}
                   </CodeBlock>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant="secondary">macOS</Badge>
-                    <span className="text-sm text-muted-foreground">
-                      ~/Library/Application Support/Claude/claude_desktop_config.json
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Badge variant="secondary">Windows</Badge>
-                    <span className="text-sm text-muted-foreground">
-                      %APPDATA%\Claude\claude_desktop_config.json
-                    </span>
+                  <div className="mt-4">
+                    <Button variant="outline" asChild>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/mcp-servers" target="_blank" rel="noopener noreferrer">
+                        View VS Code MCP Documentation
+                      </a>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle>3. Create Configuration</CardTitle>
+                  <CardTitle>3. Add Documentation Sources</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Create a docs-config.json file to specify your documentation sources:
+                    Open the web interface to manage your documentation sources:
                   </p>
-                  <CodeBlock onCopy={() => handleCopy(configFile)}>
-                    {configFile}
-                  </CodeBlock>
+                  <div className="bg-muted border border-border rounded-lg p-4">
+                    <code className="text-sm">http://localhost:6280</code>
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Use the web interface to add GitHub repositories, websites, npm packages, and local files.
+                  </p>
                 </CardContent>
               </Card>
             </TabsContent>
