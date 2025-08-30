@@ -125,42 +125,59 @@ export const Installation = () => {
             <TabsContent value="config" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Documentation Sources</CardTitle>
+                  <CardTitle>Embedding Model Configuration</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  <p className="text-muted-foreground mb-4">
+                    Configure different embedding providers for document vectorization. Choose from cloud providers or run locally for complete privacy.
+                  </p>
+                  
                   <div>
-                    <h4 className="font-semibold mb-2 text-primary">GitHub Repositories</h4>
-                    <CodeBlock onCopy={() => handleCopy('{\n  "type": "github",\n  "url": "https://github.com/owner/repo",\n  "version": "v1.0.0",\n  "paths": ["docs/", "README.md"]\n}')}>
-{`{
-  "type": "github",
-  "url": "https://github.com/owner/repo",
-  "version": "v1.0.0",
-  "paths": ["docs/", "README.md"]
-}`}
+                    <h4 className="font-semibold mb-2 text-primary">OpenAI (Default)</h4>
+                    <CodeBlock onCopy={() => handleCopy('OPENAI_API_KEY="sk-proj-your-openai-api-key" \\\nDOCS_MCP_EMBEDDING_MODEL="text-embedding-3-small" \\\nnpx @arabold/docs-mcp-server@latest')}>
+{`OPENAI_API_KEY="sk-proj-your-openai-api-key" \\
+DOCS_MCP_EMBEDDING_MODEL="text-embedding-3-small" \\
+npx @arabold/docs-mcp-server@latest`}
                     </CodeBlock>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-2 text-primary">Websites</h4>
-                    <CodeBlock onCopy={() => handleCopy('{\n  "type": "website",\n  "url": "https://docs.example.com",\n  "crawlDepth": 3,\n  "selectors": [".content", ".documentation"]\n}')}>
-{`{
-  "type": "website",
-  "url": "https://docs.example.com",
-  "crawlDepth": 3,
-  "selectors": [".content", ".documentation"]
-}`}
+                    <h4 className="font-semibold mb-2 text-primary">Ollama (Local)</h4>
+                    <CodeBlock onCopy={() => handleCopy('OPENAI_API_KEY="ollama" \\\nOPENAI_API_BASE="http://localhost:11434/v1" \\\nDOCS_MCP_EMBEDDING_MODEL="nomic-embed-text" \\\nnpx @arabold/docs-mcp-server@latest')}>
+{`OPENAI_API_KEY="ollama" \\
+OPENAI_API_BASE="http://localhost:11434/v1" \\
+DOCS_MCP_EMBEDDING_MODEL="nomic-embed-text" \\
+npx @arabold/docs-mcp-server@latest`}
                     </CodeBlock>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-2 text-primary">NPM Packages</h4>
-                    <CodeBlock onCopy={() => handleCopy('{\n  "type": "npm",\n  "package": "react",\n  "version": "18.2.0",\n  "includeTypeDefs": true\n}')}>
-{`{
-  "type": "npm",
-  "package": "react", 
-  "version": "18.2.0",
-  "includeTypeDefs": true
-}`}
+                    <h4 className="font-semibold mb-2 text-primary">LM Studio (Local)</h4>
+                    <CodeBlock onCopy={() => handleCopy('OPENAI_API_KEY="lmstudio" \\\nOPENAI_API_BASE="http://localhost:1234/v1" \\\nDOCS_MCP_EMBEDDING_MODEL="text-embedding-qwen3-embedding-4b" \\\nnpx @arabold/docs-mcp-server@latest')}>
+{`OPENAI_API_KEY="lmstudio" \\
+OPENAI_API_BASE="http://localhost:1234/v1" \\
+DOCS_MCP_EMBEDDING_MODEL="text-embedding-qwen3-embedding-4b" \\
+npx @arabold/docs-mcp-server@latest`}
+                    </CodeBlock>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2 text-primary">Google Gemini</h4>
+                    <CodeBlock onCopy={() => handleCopy('GOOGLE_API_KEY="your-google-api-key" \\\nDOCS_MCP_EMBEDDING_MODEL="gemini:embedding-001" \\\nnpx @arabold/docs-mcp-server@latest')}>
+{`GOOGLE_API_KEY="your-google-api-key" \\
+DOCS_MCP_EMBEDDING_MODEL="gemini:embedding-001" \\
+npx @arabold/docs-mcp-server@latest`}
+                    </CodeBlock>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2 text-primary">AWS Bedrock</h4>
+                    <CodeBlock onCopy={() => handleCopy('AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\\nAWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\\nAWS_REGION="us-east-1" \\\nDOCS_MCP_EMBEDDING_MODEL="aws:amazon.titan-embed-text-v1" \\\nnpx @arabold/docs-mcp-server@latest')}>
+{`AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\
+AWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\
+AWS_REGION="us-east-1" \\
+DOCS_MCP_EMBEDDING_MODEL="aws:amazon.titan-embed-text-v1" \\
+npx @arabold/docs-mcp-server@latest`}
                     </CodeBlock>
                   </div>
                 </CardContent>
