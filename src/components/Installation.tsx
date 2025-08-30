@@ -32,7 +32,7 @@ export const Installation = () => {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const npxCommand = "npx @arabold/docs-mcp-server@latest";
+  const installCommand = "npm install -g @arabold/docs-mcp-server";
   const vscodeExample = `{
   "mcpServers": {
     "docs": {
@@ -71,10 +71,10 @@ export const Installation = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CodeBlock onCopy={() => handleCopy(npxCommand)}>
-                    {npxCommand}
+                  <CodeBlock onCopy={() => handleCopy(installCommand)}>
+                    {installCommand}
                   </CodeBlock>
-                  {copiedCode === npxCommand && (
+                  {copiedCode === installCommand && (
                     <div className="flex items-center space-x-2 mt-2 text-success">
                       <CheckCircle className="h-4 w-4" />
                       <span className="text-sm">Copied to clipboard!</span>
