@@ -114,7 +114,7 @@ export const Installation = () => {
     };
   }, []);
 
-  const startServerCommand = `OPENAI_API_KEY="your-openai-api-key" npx @arabold/docs-mcp-server@latest`;
+  const startServerCommand = `npx @arabold/docs-mcp-server@latest`;
   const vscodeExample = `{
   "mcpServers": {
     "docs-mcp-server": {
@@ -160,8 +160,8 @@ export const Installation = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    Start the Docs MCP Server with an embedding provider API key
-                    (OpenAI shown here, see{" "}
+                    Start the Docs MCP Server. Optionally add an embedding
+                    provider API key for improved search results (see{" "}
                     <button
                       type="button"
                       onClick={() => setActiveTab("config")}
@@ -169,8 +169,8 @@ export const Installation = () => {
                     >
                       Configuration
                     </button>{" "}
-                    for other options, including fully local ones). This
-                    provides both the MCP endpoint and web interface.
+                    for options, including fully local ones). This provides both
+                    the MCP endpoint and web interface.
                   </p>
                   <CodeBlock onCopy={() => handleCopy(startServerCommand)}>
                     {startServerCommand}
@@ -188,7 +188,8 @@ export const Installation = () => {
                     </summary>
                     <div className="mt-3 pl-4 border-l-2 border-border">
                       <p className="text-sm text-muted-foreground mb-2">
-                        Use Docker for easier setup and isolation:
+                        Use Docker for easier setup and isolation. Optionally
+                        include an embedding provider API key:
                       </p>
                       <pre className="text-xs text-muted-foreground font-mono bg-muted/50 p-2 rounded">
                         {`docker run --rm \\
@@ -231,7 +232,8 @@ export const Installation = () => {
                     <div className="mt-3 pl-4 border-l-2 border-border">
                       <p className="text-sm text-muted-foreground mb-2">
                         For embedded mode (no separate server), use this
-                        configuration instead:
+                        configuration. The embedding provider API key is
+                        optional:
                       </p>
                       <pre className="text-xs text-muted-foreground font-mono bg-muted/50 p-2 rounded">
                         {`{
@@ -289,25 +291,76 @@ export const Installation = () => {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <p className="text-muted-foreground mb-4">
-                    Configure different embedding providers for document
-                    vectorization. Choose from cloud providers or run locally
-                    for complete privacy.
+                    Optionally configure embedding providers for document
+                    vectorization to improve search results. Choose from cloud
+                    providers or run locally for complete privacy.
                   </p>
 
+                  <div className="mb-6">
+                    <h5 className="font-medium text-foreground mb-3">
+                      Supported providers are:
+                    </h5>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-start">
+                        <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span>
+                          <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-foreground">
+                            openai
+                          </code>{" "}
+                          (default), requires OpenAI API key or Ollama / LM
+                          Studio for local
+                        </span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span>
+                          <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-foreground">
+                            google
+                          </code>{" "}
+                          for Google Gemini, requires Google API key
+                        </span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span>
+                          <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-foreground">
+                            aws
+                          </code>{" "}
+                          for AWS Bedrock, requires AWS credentials
+                        </span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span>
+                          <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-foreground">
+                            sagemaker
+                          </code>{" "}
+                          for AWS SageMaker, requires AWS credentials
+                        </span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="inline-block w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span>
+                          <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-foreground">
+                            microsoft
+                          </code>{" "}
+                          for Azure OpenAI, requires Azure credentials
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
                   <div>
-                    <h4 className="font-semibold mb-2 text-primary">
-                      OpenAI (Default)
-                    </h4>
+                    <h4 className="font-semibold mb-2 text-primary">OpenAI</h4>
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'OPENAI_API_KEY="sk-proj-your-openai-api-key" \\\nDOCS_MCP_EMBEDDING_MODEL="text-embedding-3-small" \\\nnpx @arabold/docs-mcp-server@latest'
+                          'OPENAI_API_KEY="sk-proj-your-openai-api-key" \\\nnpx @arabold/docs-mcp-server@latest --embedding-model text-embedding-3-small'
                         )
                       }
                     >
                       {`OPENAI_API_KEY="sk-proj-your-openai-api-key" \\
-DOCS_MCP_EMBEDDING_MODEL="text-embedding-3-small" \\
-npx @arabold/docs-mcp-server@latest`}
+npx @arabold/docs-mcp-server@latest --embedding-model text-embedding-3-small`}
                     </CodeBlock>
                   </div>
 
@@ -318,14 +371,13 @@ npx @arabold/docs-mcp-server@latest`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'OPENAI_API_KEY="ollama" \\\nOPENAI_API_BASE="http://localhost:11434/v1" \\\nDOCS_MCP_EMBEDDING_MODEL="nomic-embed-text" \\\nnpx @arabold/docs-mcp-server@latest'
+                          'OPENAI_API_KEY="ollama" \\\nOPENAI_API_BASE="http://localhost:11434/v1" \\\nnpx @arabold/docs-mcp-server@latest --embedding-model openai:nomic-embed-text'
                         )
                       }
                     >
                       {`OPENAI_API_KEY="ollama" \\
 OPENAI_API_BASE="http://localhost:11434/v1" \\
-DOCS_MCP_EMBEDDING_MODEL="nomic-embed-text" \\
-npx @arabold/docs-mcp-server@latest`}
+npx @arabold/docs-mcp-server@latest --embedding-model openai:nomic-embed-text`}
                     </CodeBlock>
                   </div>
 
@@ -336,14 +388,13 @@ npx @arabold/docs-mcp-server@latest`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'OPENAI_API_KEY="lmstudio" \\\nOPENAI_API_BASE="http://localhost:1234/v1" \\\nDOCS_MCP_EMBEDDING_MODEL="text-embedding-qwen3-embedding-4b" \\\nnpx @arabold/docs-mcp-server@latest'
+                          'OPENAI_API_KEY="lmstudio" \\\nOPENAI_API_BASE="http://localhost:1234/v1" \\\nnpx @arabold/docs-mcp-server@latest --embedding-model openai:text-embedding-qwen3-embedding-4b'
                         )
                       }
                     >
                       {`OPENAI_API_KEY="lmstudio" \\
 OPENAI_API_BASE="http://localhost:1234/v1" \\
-DOCS_MCP_EMBEDDING_MODEL="text-embedding-qwen3-embedding-4b" \\
-npx @arabold/docs-mcp-server@latest`}
+npx @arabold/docs-mcp-server@latest --embedding-model openai:text-embedding-qwen3-embedding-0.6b`}
                     </CodeBlock>
                   </div>
 
@@ -354,13 +405,12 @@ npx @arabold/docs-mcp-server@latest`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'GOOGLE_API_KEY="your-google-api-key" \\\nDOCS_MCP_EMBEDDING_MODEL="gemini:embedding-001" \\\nnpx @arabold/docs-mcp-server@latest'
+                          'GOOGLE_API_KEY="your-google-api-key" \\\nnpx @arabold/docs-mcp-server@latest --embedding-model gemini:embedding-001'
                         )
                       }
                     >
                       {`GOOGLE_API_KEY="your-google-api-key" \\
-DOCS_MCP_EMBEDDING_MODEL="gemini:embedding-001" \\
-npx @arabold/docs-mcp-server@latest`}
+npx @arabold/docs-mcp-server@latest --embedding-model gemini:embedding-001`}
                     </CodeBlock>
                   </div>
 
@@ -371,15 +421,14 @@ npx @arabold/docs-mcp-server@latest`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\\nAWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\\nAWS_REGION="us-east-1" \\\nDOCS_MCP_EMBEDDING_MODEL="aws:amazon.titan-embed-text-v1" \\\nnpx @arabold/docs-mcp-server@latest'
+                          'AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\\nAWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\\nAWS_REGION="us-east-1" \\\nnpx @arabold/docs-mcp-server@latest --embedding-model aws:amazon.titan-embed-text-v1'
                         )
                       }
                     >
                       {`AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\
 AWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\
 AWS_REGION="us-east-1" \\
-DOCS_MCP_EMBEDDING_MODEL="aws:amazon.titan-embed-text-v1" \\
-npx @arabold/docs-mcp-server@latest`}
+npx @arabold/docs-mcp-server@latest --embedding-model aws:amazon.titan-embed-text-v1`}
                     </CodeBlock>
                   </div>
                 </CardContent>
