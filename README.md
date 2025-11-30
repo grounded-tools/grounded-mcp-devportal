@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
+# Grounded Docs Developer Portal
 
-## Project info
+**Your AI's Up-to-Date Documentation Expert**
 
-**URL**: https://lovable.dev/projects/ec8b24bd-09f0-49b4-b898-6b69f09b902f
+This repository contains the source code for the official landing page and developer portal for the [Grounded Docs MCP Server](https://github.com/arabold/docs-mcp-server).
 
-## How can I edit this code?
+## About
 
-There are several ways of editing your application.
+Grounded Docs is an MCP (Model Context Protocol) server that provides AI coding assistants with accurate, up-to-date documentation. It solves the common problem of AI hallucinations caused by outdated or missing library knowledge by creating a personal, always-current knowledge base.
 
-**Use Lovable**
+## Key Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ec8b24bd-09f0-49b4-b898-6b69f09b902f) and start prompting.
+- **Multi-Source Indexing** - Index documentation from websites, GitHub repositories, npm/PyPI packages, and local files
+- **Structure-Aware RAG** - Semantic chunking preserves document hierarchy, code blocks, and API signatures
+- **Smart Context Assembly** - Reassembles relevant context from multiple chunks, reducing token usage and API costs
+- **Code-Aware Processing** - Preserves code formatting, syntax highlighting hints, and technical accuracy
+- **Version Targeting** - Query documentation for specific library versions (e.g., React 18.x, TypeScript 5.2.x)
+- **Local & Private** - Runs entirely on your machine with no data sent to external servers
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+This portal is built with:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- [React](https://react.dev/) - UI library
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Vite](https://vitejs.dev/) - Build tool
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [shadcn/ui](https://ui.shadcn.com/) - UI components
+- [Lucide React](https://lucide.dev/) - Icons
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Getting Started
 
-Follow these steps:
+### Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Node.js 18+ ([install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+# Clone the repository
+git clone https://github.com/grounded-tools/grounded-mcp-devportal.git
+cd grounded-mcp-devportal
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build
 
-**Use GitHub Codespaces**
+```bash
+# Create production build
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Preview production build
+npm run preview
+```
 
-## What technologies are used for this project?
+## Project Structure
 
-This project is built with:
+```
+src/
+├── components/     # Reusable UI components
+│   ├── ui/         # shadcn/ui primitives
+│   ├── Hero.tsx    # Hero section with particle animation
+│   ├── Features.tsx # Features section
+│   └── ...
+├── pages/          # Page components
+├── hooks/          # Custom React hooks
+├── lib/            # Utility functions
+└── assets/         # Static assets
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Contributing
 
-## How can I deploy this project?
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Simply open [Lovable](https://lovable.dev/projects/ec8b24bd-09f0-49b4-b898-6b69f09b902f) and click on Share -> Publish.
+## License
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT
