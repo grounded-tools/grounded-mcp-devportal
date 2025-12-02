@@ -7,101 +7,101 @@ All colors MUST be HSL.
 */
 
 @layer base {
-	:root {
-		/* VS Code Dark Theme Colors */
-		--background: 217 19% 11%; /* #1e1e1e */
-		--foreground: 0 0% 88%; /* #e1e1e1 */
+  :root {
+    /* VS Code Dark Theme Colors */
+    --background: 217 19% 11%; /* #1e1e1e */
+    --foreground: 0 0% 88%; /* #e1e1e1 */
 
-		--card: 217 19% 15%; /* #252526 */
-		--card-foreground: 0 0% 88%;
+    --card: 217 19% 15%; /* #252526 */
+    --card-foreground: 0 0% 88%;
 
-		--popover: 217 19% 15%;
-		--popover-foreground: 0 0% 88%;
+    --popover: 217 19% 15%;
+    --popover-foreground: 0 0% 88%;
 
-		--primary: 207 77% 43%; /* #007acc - VS Code blue */
-		--primary-foreground: 0 0% 100%;
+    --primary: 207 77% 43%; /* #007acc - VS Code blue */
+    --primary-foreground: 0 0% 100%;
 
-		--secondary: 217 19% 18%; /* #2d2d30 */
-		--secondary-foreground: 0 0% 88%;
+    --secondary: 217 19% 18%; /* #2d2d30 */
+    --secondary-foreground: 0 0% 88%;
 
-		--muted: 217 19% 22%; /* #3c3c3c */
-		--muted-foreground: 0 0% 64%; /* #a3a3a3 */
+    --muted: 217 19% 22%; /* #3c3c3c */
+    --muted-foreground: 0 0% 64%; /* #a3a3a3 */
 
-		--accent: 40 100% 50%; /* #ffaa00 - VS Code orange accent */
-		--accent-foreground: 217 19% 11%;
+    --accent: 40 100% 50%; /* #ffaa00 - VS Code orange accent */
+    --accent-foreground: 217 19% 11%;
 
-		--success: 142 71% 45%; /* #22c55e */
-		--success-foreground: 0 0% 100%;
+    --success: 142 71% 45%; /* #22c55e */
+    --success-foreground: 0 0% 100%;
 
-		--warning: 38 92% 50%; /* #f59e0b */
-		--warning-foreground: 0 0% 100%;
+    --warning: 38 92% 50%; /* #f59e0b */
+    --warning-foreground: 0 0% 100%;
 
-		--destructive: 0 84% 60%;
-		--destructive-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-		--border: 217 19% 22%; /* #3c3c3c */
-		--input: 217 19% 18%;
-		--ring: 207 77% 43%;
+    --border: 217 19% 22%; /* #3c3c3c */
+    --input: 217 19% 18%;
+    --ring: 207 77% 43%;
 
-		/* Code syntax highlighting colors */
-		--code-keyword: 197 71% 73%; /* #4fc1ff */
-		--code-string: 120 100% 75%; /* #4caf50 */
-		--code-comment: 0 0% 50%; /* #808080 */
-		--code-function: 48 100% 67%; /* #dcdcaa */
+    /* Code syntax highlighting colors */
+    --code-keyword: 197 71% 73%; /* #4fc1ff */
+    --code-string: 120 100% 75%; /* #4caf50 */
+    --code-comment: 0 0% 50%; /* #808080 */
+    --code-function: 48 100% 67%; /* #dcdcaa */
 
-		/* Gradient definitions */
-		--gradient-primary: linear-gradient(
-			135deg,
-			hsl(207 77% 43%),
-			hsl(217 100% 54%)
-		);
-		--gradient-accent: linear-gradient(
-			135deg,
-			hsl(40 100% 50%),
-			hsl(48 100% 67%)
-		);
+    /* Gradient definitions */
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(207 77% 43%),
+      hsl(217 100% 54%)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(40 100% 50%),
+      hsl(48 100% 67%)
+    );
 
-		/* Glow effects */
-		--glow-primary: 0 8px 32px hsl(207 77% 43% / 0.3);
-		--glow-accent: 0 8px 32px hsl(40 100% 50% / 0.2);
+    /* Glow effects */
+    --glow-primary: 0 8px 32px hsl(207 77% 43% / 0.3);
+    --glow-accent: 0 8px 32px hsl(40 100% 50% / 0.2);
 
-		--radius: 0.5rem;
-	}
+    --radius: 0.5rem;
+  }
 
-	.dark {
-		/* Same as root since we're going full dark theme */
-		--background: 217 19% 11%;
-		--foreground: 0 0% 88%;
-		--card: 217 19% 15%;
-		--card-foreground: 0 0% 88%;
-		--popover: 217 19% 15%;
-		--popover-foreground: 0 0% 88%;
-		--primary: 207 77% 43%;
-		--primary-foreground: 0 0% 100%;
-		--secondary: 217 19% 18%;
-		--secondary-foreground: 0 0% 88%;
-		--muted: 217 19% 22%;
-		--muted-foreground: 0 0% 64%;
-		--accent: 40 100% 50%;
-		--accent-foreground: 217 19% 11%;
-		--success: 142 71% 45%;
-		--success-foreground: 0 0% 100%;
-		--warning: 38 92% 50%;
-		--warning-foreground: 0 0% 100%;
-		--destructive: 0 84% 60%;
-		--destructive-foreground: 0 0% 100%;
-		--border: 217 19% 22%;
-		--input: 217 19% 18%;
-		--ring: 207 77% 43%;
-	}
+  .dark {
+    /* Same as root since we're going full dark theme */
+    --background: 217 19% 11%;
+    --foreground: 0 0% 88%;
+    --card: 217 19% 15%;
+    --card-foreground: 0 0% 88%;
+    --popover: 217 19% 15%;
+    --popover-foreground: 0 0% 88%;
+    --primary: 207 77% 43%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 19% 18%;
+    --secondary-foreground: 0 0% 88%;
+    --muted: 217 19% 22%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 40 100% 50%;
+    --accent-foreground: 217 19% 11%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 19% 22%;
+    --input: 217 19% 18%;
+    --ring: 207 77% 43%;
+  }
 }
 
 @layer base {
-	* {
-		@apply border-border;
-	}
+  * {
+    @apply border-border;
+  }
 
-	body {
-		@apply bg-background text-foreground;
-	}
+  body {
+    @apply bg-background text-foreground;
+  }
 }

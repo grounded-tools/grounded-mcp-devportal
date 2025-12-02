@@ -1,4 +1,19 @@
-import { useId } from "react";
+import {
+  Code2,
+  Cpu,
+  Database,
+  FileText,
+  Github,
+  Globe,
+  Package,
+  RefreshCw,
+  Search,
+  Shield,
+  Target,
+  Zap,
+} from "lucide-react";
+import howItWorksImage from "@/assets/how-it-works.png";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -6,21 +21,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Globe,
-  Github,
-  Package,
-  FileText,
-  Search,
-  RefreshCw,
-  Target,
-  Shield,
-  Zap,
-  Cpu,
-  Database,
-  Code2,
-} from "lucide-react";
 
 const features = [
   {
@@ -89,9 +89,8 @@ const features = [
 ];
 
 export const Features = () => {
-  const featuresId = useId();
   return (
-    <section id={featuresId} className="py-24 bg-secondary/30">
+    <section id="features" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
@@ -105,9 +104,9 @@ export const Features = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <Card
-              key={index}
+              key={feature.title}
               className="border-border bg-card hover:shadow-glow-primary/20 transition-all duration-300 group"
             >
               <CardHeader>
@@ -123,12 +122,8 @@ export const Features = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-1">
-                  {feature.tags.map((tag, tagIndex) => (
-                    <Badge
-                      key={tagIndex}
-                      variant="secondary"
-                      className="text-xs"
-                    >
+                  {feature.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="text-xs">
                       {tag}
                     </Badge>
                   ))}
@@ -150,7 +145,7 @@ export const Features = () => {
           {/* How It Works Image */}
           <div className="flex justify-center mb-10">
             <img
-              src="/how-it-works.png"
+              src={howItWorksImage}
               alt="How Grounded Docs MCP Server Works - Structure-Aware RAG vs Naive RAG"
               className="max-w-full md:max-w-4xl rounded-lg border border-border shadow-lg"
             />
