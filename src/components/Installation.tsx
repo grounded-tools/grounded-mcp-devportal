@@ -102,14 +102,14 @@ export const Installation = () => {
     window.addEventListener("switchToUsageTab", handleSwitchToUsageTab);
     window.addEventListener(
       "switchToQuickStartTab",
-      handleSwitchToQuickStartTab,
+      handleSwitchToQuickStartTab
     );
 
     return () => {
       window.removeEventListener("switchToUsageTab", handleSwitchToUsageTab);
       window.removeEventListener(
         "switchToQuickStartTab",
-        handleSwitchToQuickStartTab,
+        handleSwitchToQuickStartTab
       );
     };
   }, []);
@@ -196,6 +196,7 @@ export const Installation = () => {
                         {`docker run --rm \\
   -e OPENAI_API_KEY="your-openai-api-key" \\
   -v docs-mcp-data:/data \\
+  -v docs-mcp-config:/config \\
   -p 6280:6280 \\
   ghcr.io/arabold/docs-mcp-server:latest`}
                       </pre>
@@ -288,6 +289,217 @@ export const Installation = () => {
             <TabsContent value="config" className="space-y-6">
               <Card>
                 <CardHeader>
+                  <CardTitle>Configuration Loading</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <p className="text-muted-foreground">
+                    The Docs MCP Server supports a multi-layered configuration
+                    system. Settings are merged from multiple sources in a
+                    defined order of priority.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-3 text-primary">
+                        Precedence Rules
+                      </h4>
+                      <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
+                        <li className="pl-1">
+                          <span className="text-foreground font-medium">
+                            CLI Flags
+                          </span>{" "}
+                          (highest priority)
+                        </li>
+                        <li className="pl-1">
+                          <span className="text-foreground font-medium">
+                            Environment Variables
+                          </span>
+                        </li>
+                        <li className="pl-1">
+                          <span className="text-foreground font-medium">
+                            Configuration File
+                          </span>{" "}
+                          (
+                          <code className="bg-muted px-1 rounded text-xs">
+                            config.yaml
+                          </code>
+                          )
+                        </li>
+                        <li className="pl-1">
+                          <span className="text-foreground font-medium">
+                            Default Values
+                          </span>{" "}
+                          (lowest priority)
+                        </li>
+                      </ol>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold mb-3 text-primary">
+                        Configuration Location
+                      </h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        The system default configuration file (
+                        <code className="bg-muted px-1 rounded text-xs">
+                          config.yaml
+                        </code>
+                        ) is located at:
+                      </p>
+                      <div className="space-y-3 text-sm text-muted-foreground">
+                        <div>
+                          <span className="text-foreground font-medium block text-xs uppercase tracking-wider mb-1">
+                            macOS
+                          </span>
+                          <code className="bg-muted px-2 py-1 rounded text-xs break-all">
+                            ~/Library/Preferences/docs-mcp-server/config.yaml
+                          </code>
+                        </div>
+                        <div>
+                          <span className="text-foreground font-medium block text-xs uppercase tracking-wider mb-1">
+                            Linux
+                          </span>
+                          <code className="bg-muted px-2 py-1 rounded text-xs break-all">
+                            ~/.config/docs-mcp-server/config.yaml
+                          </code>
+                        </div>
+                        <div>
+                          <span className="text-foreground font-medium block text-xs uppercase tracking-wider mb-1">
+                            Windows
+                          </span>
+                          <code className="bg-muted px-2 py-1 rounded text-xs break-all">
+                            %APPDATA%\docs-mcp-server\Config\config.yaml
+                          </code>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr className="border-border" />
+
+                  <div>
+                    <h4 className="font-semibold mb-3 text-primary">
+                      Environment Variables
+                    </h4>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-border">
+                            <th className="py-2 pr-4 font-medium text-foreground">
+                              Variable
+                            </th>
+                            <th className="py-2 pr-4 font-medium text-foreground">
+                              Description
+                            </th>
+                            <th className="py-2 font-medium text-foreground whitespace-nowrap">
+                              Default
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-muted-foreground">
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_PROTOCOL
+                            </td>
+                            <td className="py-3 pr-4">
+                              Server protocol (`auto`, `stdio`, `http`)
+                            </td>
+                            <td className="py-3 font-mono text-xs">auto</td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_PORT
+                            </td>
+                            <td className="py-3 pr-4">
+                              Server port (legacy:{" "}
+                              <code className="text-xs">PORT</code>)
+                            </td>
+                            <td className="py-3 font-mono text-xs">6280</td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_WEB_PORT
+                            </td>
+                            <td className="py-3 pr-4">Web interface port</td>
+                            <td className="py-3 font-mono text-xs">6281</td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_HOST
+                            </td>
+                            <td className="py-3 pr-4">
+                              Host to bind to (legacy:{" "}
+                              <code className="text-xs">HOST</code>)
+                            </td>
+                            <td className="py-3 font-mono text-xs">
+                              127.0.0.1
+                            </td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_STORAGE_PATH
+                            </td>
+                            <td className="py-3 pr-4">
+                              Directory for data storage
+                            </td>
+                            <td className="py-3 font-mono text-xs">
+                              ~/.local/share/docs-mcp-server
+                            </td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_READ_ONLY
+                            </td>
+                            <td className="py-3 pr-4">
+                              Enable read-only mode (no new indexing)
+                            </td>
+                            <td className="py-3 font-mono text-xs">false</td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_AUTH_ENABLED
+                            </td>
+                            <td className="py-3 pr-4">Enable authentication</td>
+                            <td className="py-3 font-mono text-xs">false</td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_TELEMETRY
+                            </td>
+                            <td className="py-3 pr-4">
+                              Enable usage telemetry
+                            </td>
+                            <td className="py-3 font-mono text-xs">true</td>
+                          </tr>
+                          <tr>
+                            <td className="py-3 pr-4 font-mono text-xs">
+                              DOCS_MCP_EMBEDDING_MODEL
+                            </td>
+                            <td className="py-3 pr-4">
+                              Embedding model to use
+                            </td>
+                            <td className="py-3 font-mono text-xs">
+                              text-embedding-3-small
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="mt-4 p-3 bg-muted rounded-md border border-border">
+                      <p className="text-sm text-muted-foreground">
+                        <strong className="text-foreground">Note:</strong>{" "}
+                        Embedding provider credentials (like{" "}
+                        <code>OPENAI_API_KEY</code>, <code>GOOGLE_API_KEY</code>
+                        , etc.) use their own standard service-specific
+                        environment variables. See the Embedding Model
+                        Configuration section below for details.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
                   <CardTitle>Embedding Model Configuration</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -356,7 +568,7 @@ export const Installation = () => {
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'OPENAI_API_KEY="sk-proj-your-openai-api-key" \\\nnpx @arabold/docs-mcp-server --embedding-model text-embedding-3-small',
+                          'OPENAI_API_KEY="sk-proj-your-openai-api-key" \\\nnpx @arabold/docs-mcp-server --embedding-model text-embedding-3-small'
                         )
                       }
                     >
@@ -372,7 +584,7 @@ npx @arabold/docs-mcp-server --embedding-model text-embedding-3-small`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'OPENAI_API_KEY="ollama" \\\nOPENAI_API_BASE="http://localhost:11434/v1" \\\nnpx @arabold/docs-mcp-server --embedding-model openai:nomic-embed-text',
+                          'OPENAI_API_KEY="ollama" \\\nOPENAI_API_BASE="http://localhost:11434/v1" \\\nnpx @arabold/docs-mcp-server --embedding-model openai:nomic-embed-text'
                         )
                       }
                     >
@@ -389,7 +601,7 @@ npx @arabold/docs-mcp-server --embedding-model openai:nomic-embed-text`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'OPENAI_API_KEY="lmstudio" \\\nOPENAI_API_BASE="http://localhost:1234/v1" \\\nnpx @arabold/docs-mcp-server --embedding-model openai:text-embedding-qwen3-embedding-4b',
+                          'OPENAI_API_KEY="lmstudio" \\\nOPENAI_API_BASE="http://localhost:1234/v1" \\\nnpx @arabold/docs-mcp-server --embedding-model openai:text-embedding-qwen3-embedding-4b'
                         )
                       }
                     >
@@ -406,7 +618,7 @@ npx @arabold/docs-mcp-server --embedding-model openai:text-embedding-qwen3-embed
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'GOOGLE_API_KEY="your-google-api-key" \\\nnpx @arabold/docs-mcp-server --embedding-model gemini:embedding-001',
+                          'GOOGLE_API_KEY="your-google-api-key" \\\nnpx @arabold/docs-mcp-server --embedding-model gemini:embedding-001'
                         )
                       }
                     >
@@ -422,7 +634,7 @@ npx @arabold/docs-mcp-server --embedding-model gemini:embedding-001`}
                     <CodeBlock
                       onCopy={() =>
                         handleCopy(
-                          'AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\\nAWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\\nAWS_REGION="us-east-1" \\\nnpx @arabold/docs-mcp-server --embedding-model aws:amazon.titan-embed-text-v1',
+                          'AWS_ACCESS_KEY_ID="your-aws-access-key-id" \\\nAWS_SECRET_ACCESS_KEY="your-aws-secret-access-key" \\\nAWS_REGION="us-east-1" \\\nnpx @arabold/docs-mcp-server --embedding-model aws:amazon.titan-embed-text-v1'
                         )
                       }
                     >
@@ -437,6 +649,72 @@ npx @arabold/docs-mcp-server --embedding-model aws:amazon.titan-embed-text-v1`}
             </TabsContent>
 
             <TabsContent value="usage" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>CLI Commands</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    You can manage documentation directly from your terminal
+                    using the CLI.
+                  </p>
+
+                  <div className="bg-muted border border-border rounded-lg p-4">
+                    <h4 className="font-semibold mb-2">
+                      Index New Documentation
+                    </h4>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Scrape a website and index it as a library.
+                    </p>
+                    <CodeBlock
+                      onCopy={() =>
+                        handleCopy(
+                          "npx @arabold/docs-mcp-server scrape react https://react.dev/reference/react"
+                        )
+                      }
+                    >
+                      npx @arabold/docs-mcp-server scrape react
+                      https://react.dev/reference/react
+                    </CodeBlock>
+                  </div>
+
+                  <div className="bg-muted border border-border rounded-lg p-4">
+                    <h4 className="font-semibold mb-2">
+                      List Indexed Libraries
+                    </h4>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      See what libraries are currently available in your
+                      database.
+                    </p>
+                    <CodeBlock
+                      onCopy={() =>
+                        handleCopy("npx @arabold/docs-mcp-server list")
+                      }
+                    >
+                      npx @arabold/docs-mcp-server list
+                    </CodeBlock>
+                  </div>
+
+                  <div className="bg-muted border border-border rounded-lg p-4">
+                    <h4 className="font-semibold mb-2">
+                      Search Documentation via CLI
+                    </h4>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Test your search results directly from the command line.
+                    </p>
+                    <CodeBlock
+                      onCopy={() =>
+                        handleCopy(
+                          'npx @arabold/docs-mcp-server search react "useState hook"'
+                        )
+                      }
+                    >
+                      npx @arabold/docs-mcp-server search react "useState hook"
+                    </CodeBlock>
+                  </div>
+                </CardContent>
+              </Card>
+
               <Card>
                 <CardHeader>
                   <CardTitle>Example Queries</CardTitle>
