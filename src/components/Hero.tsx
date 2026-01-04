@@ -39,6 +39,20 @@ export const Hero = () => {
               and local files. Provide your AI with version-aware search tools
               via the Model Context Protocol.
             </p>
+            <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-3 text-sm text-muted-foreground">
+              <span className="bg-muted/50 px-3 py-1 rounded-full border border-border/50">
+                The open-source alternative to{" "}
+                <strong className="text-foreground font-medium">
+                  Context7
+                </strong>
+                {", "}
+                <strong className="text-foreground font-medium">Nia</strong>
+                {", and "}
+                <strong className="text-foreground font-medium">
+                  Ref.Tools
+                </strong>
+              </span>
+            </div>
           </div>
 
           {/* Problem Statement */}
